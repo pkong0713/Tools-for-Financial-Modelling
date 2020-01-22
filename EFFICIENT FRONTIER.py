@@ -128,3 +128,7 @@ print(f'Minimum Variance Portfolio: \n{port_mvp.transpose()}'.format())
 print('\n')
 print(f'With CAL Sharpe Ratio of {round(max_sharpe,2)} and risk-free rate of {rf}.'.format())
 
+"""
+Future Expansion:
+    -Optimization to find optimal weight
+    -Drawing the 'actual' efficient frontier"""
