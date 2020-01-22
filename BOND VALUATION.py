@@ -7,11 +7,14 @@ Note that the compounding convention here is continous
 Inputs: <Coupon Rate>, <Maturity>, <Face Value>, <Yield to Maturity>, <Number of Payments per Year>
 Methds: self.get_value() to get valuation"""
 
+#---------------------------------Part 1: Setting up the class--------------------------------------
+
+# Importing Libraries
 import numpy as np
 import pandas as pd
 import math
 
-
+# Class Creation
 class bond:
     def __init__(self,Coupon_Rate, Maturity, Face_Value, Yield_to_Maturity, n_Payment_per_year):
         """
@@ -26,7 +29,9 @@ class bond:
         self.fv = Face_Value
         self.N = self.m*self.n
         self.c = Coupon_Rate # Annualized
-                
+ 
+#---------------------------------Part 2: Creating the methods--------------------------------------
+
     def get_value(self):
         for payment_number in range(1,self.N):
             time = payment_number/self.n
