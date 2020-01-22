@@ -97,3 +97,6 @@ cor_ab = round(cov_ab[0][1]/((cov_ab[0][0]**(1/2))*(cov_ab[1][1]**(1/2))),4)
 r2_ab = round(cor_ab**2,4)
 
 print(f'Correlation between {ticker} and {market} is {cor_ab}, and R^2 is {r2_ab}.'.format())
+
+"""Future Expansion:
+    - Include various versions of CAPM, such as I-CAPM, APT, and factor models"""
