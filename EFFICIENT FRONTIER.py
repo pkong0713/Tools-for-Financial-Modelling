@@ -1,10 +1,10 @@
 """
 Markowitz's Efficient Frontier - In Modern Portfolio Theory (MPT), EF shows the return vs risk of 
-#many randomly generated portfolios, also presenting the mean-variance 'efficient frontier' using Monte-Carlo
-#With a risk-free asset, the EF further develops but integrating Capital Allocation Line (Part 4)
+many randomly generated portfolios, also presenting the mean-variance 'efficient frontier' using Monte-Carlo
+With a risk-free asset, the EF further develops but integrating Capital Allocation Line (Part 4)
 
-#Returns/Rates are [monthly data], as daily data are composed of noises thus giving excess volatility
-#Inputs: <timeframe>, <stock_selection>, <rf_df>, <number of generations>"""
+Returns/Rates are [monthly data], as daily data are composed of noises thus giving excess volatility
+Inputs: <timeframe>, <stock_selection>, <rf_df>, <number of generations>"""
 
 #----------------------------------Part 1: Setting up the data--------------------------------------
 # Importing the essential libraries
