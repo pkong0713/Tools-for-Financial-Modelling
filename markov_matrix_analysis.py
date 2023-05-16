@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 
 #------------------------ Loading and Processing data ------------------------
-df = pd.read_csv(r'C:/Users/Philip/Desktop/quartz/data.csv')
+df = pd.read_csv(r'data.csv')
 df = df.reset_index()
 df = df['Close']
 
