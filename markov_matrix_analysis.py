@@ -1,29 +1,24 @@
 #-------------------------------- Description --------------------------------
 """This file will analyze the stochastic matrix (aka Markov matrix),
 given a dataframe of stock prices. The target input data is expected
-to have the columns: <Date, Close, Volume>, where data should be sorted
-in ascending order. This file will then convert the data into a column of data
-with <Close> only for analysis. 
+to have the column <Close>
 
 The parameters to this analysis will be:
     - the input file itself (decides number of trading days and security)
-    - number of states: s
+    - the 'borders' of the states, in percentages
     
 With these two variables, the model will come up with a Markov matrix with the
 specified number of trading days and number of states (percentiles are equally
-distributed). Target input == data.csv, Target output = Markov matrix A, and
+distributed). Target input = data.csv, Target output = Markov matrix A, and
 the steady state vector pi"""
 #---------------------------- Importing Libraries ----------------------------
 import pandas as pd
 import numpy as np
 
 #------------------------ Loading and Processing data ------------------------
-df = pd.read_csv(r'data.csv')
+df = pd.read_csv(r'C:/Users/Philip/Desktop/quartz/data.csv')
 df = df.reset_index()
 df = df['Close']
-
-#--------------------------- Setting the parameters --------------------------
-s = 4
 
 #--------------------------- Constructing the data ---------------------------
 df_p = []
@@ -32,13 +27,9 @@ for i in range(len(df)-1):
     df_p.append((df[i+1]/df[i]-1)*100)
 
 #-----------Parameter for dimension of probability transition matrix----------
-percentiles = []
-for i in range(s+1):
-    percentiles.append(int(100*i/s))
-    
-border = []
-for i in range(len(percentiles)):
-    border.append(np.percentile(df_p,percentiles[i]))
+border = [min(df_p), 5, 0, -4, max(df_p)]
+border.sort()
+s = len(border)-1
 
 #--------------------Creating the states and the transitions------------------
 state_path = []
@@ -47,16 +38,16 @@ def is_between(a, x, b):
     return min(a, b) <= x <= max(a, b)
     
 for i in df_p:
-    for b in range(len(border)-1):
+    for b in range(s):
         if is_between(border[b],i,border[b+1]) == True:
             state_path.append(b)
 
 state_path_1 = state_path[1:]
-state_path = state_path[:len(df)-1]
+state_path = state_path[:len(state_path)-1]
 
 transition = np.array([[state_path],[state_path_1]])
 transition = transition.transpose()
-transition = np.reshape(transition,(len(df)-1,2))
+transition = np.reshape(transition,(len(state_path),2))
 
 #-------------------------Creating Markov Matrix A----------------------------
 markov_matrix = np.zeros((s,s))
